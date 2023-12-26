@@ -163,13 +163,15 @@ def range2cidr(ip1, ip2):
     r1 = IPRange(ip1, ip2)
     return str(r1.cidrs()[-1])
 
-
 def write_to_file(data, target_file):
     """
     Function for writing returned data to a file
     """
-    with open(target_file, "w") as fd:
-        fd.write(data)
+    if target_file == "-":
+        sys.stdout.write(data)
+    else:
+        with open(target_file, "w") as fd:
+            fd.write(data)
 
 
 def generate_testname(name_len, name_suffix):
